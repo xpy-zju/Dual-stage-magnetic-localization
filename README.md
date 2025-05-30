@@ -2,13 +2,13 @@
 
 This repository provides the implementation of the dual-stage magnetic localization algorithm for the flexible intermediary patch. It includes examples of the first stage, where the external magnetic source is used to localize the patch, and the second stage, where the sensor array is used to localize the internal magnetic source. All functions and scripts are primarily written in MATLAB.
 
-<center class ='img'>
+<div align=center>
 <img src="Fig_file/intro.png" width = 60%>  
-</center>
+</div>
 
-<center class ='text'>
+<div align=center>
 The concept of dual-stage magnetic localization inspired from A-GPS
-</center>
+</div>
 
 ## Prerequisites
 - **Matlab R2023a**
@@ -29,17 +29,17 @@ The concept of dual-stage magnetic localization inspired from A-GPS
   - `classdef/` Class definitions used in the MATLAB UI applications.
 
 -  `First phase/First phase.m` A simple example of the first-phase localization, demonstrating sensor localization via micro-displacement of an external magnetic source. The provided scripts are structured in executable sections, allowing users to run them step by step and inspect the corresponding results. (Supplementary Video 1)
-<center class ='img'>
+<div align=center>
 <img src="Fig_file/phase1.png" width = 80%>  
-</center>
-<center class ='text'>
+</div>
+<div align=center>
 The optimization of phase 1 （include obtaining the initial value）
-</center>
+</div>
 
 -  `Second phase/Lissajous.m` A basic implement of the second-phase localization, in which the internal magnetic source is localized based on the estimated sensor. And the analytical Jacobian significantly increases the optimization efficiency, ensuring realtime tracking.
-<center class ='img'>
+<div align=center>
 <img src="Fig_file/phase2.png" width = 80%>  
-</center>
-<center class ='text'>
+</div>
+<div align=center>
 The optimization of phase 2
-</center>
+</div>

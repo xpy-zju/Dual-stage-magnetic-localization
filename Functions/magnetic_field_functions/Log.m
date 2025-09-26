@@ -1,5 +1,5 @@
 function v = Log(R)
-%旋转矩阵变成李代数姿态量
+%Convert the rotation matrix into a Lie algebra–based orientation vector.
 %Get the Log of  rotation matrix
 tol = 1e-15;
 if max(max(abs(R-eye(3))))<tol

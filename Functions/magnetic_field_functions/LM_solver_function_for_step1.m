@@ -1,6 +1,4 @@
 function [us_est,thetas_est] = LM_solver_function_for_step1(used_sensor,Bs,us_guess,thetas_guess,uM,thetaM,M_discrete,sz)
-%UNTITLED3 此处提供此函数的摘要
-%   此处提供详细说明
 us_est = cell(9,1);
 thetas_est = cell(9,1);
 %sensor_detect = 1;

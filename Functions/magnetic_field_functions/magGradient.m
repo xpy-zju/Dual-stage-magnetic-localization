@@ -1,6 +1,6 @@
 function [dB,dBrr,dBrz] = magGradient(r,M,R,L)
-%MAGGRADIENT 计算圆柱形磁铁外任一点磁场梯度，椭圆积分模型
-%   r为磁场坐标系下中心点到目标位置的矢量
+%MAGGRADIENT Calculate the magnetic field gradient at an arbitrary point outside a cylindrical magnet 
+% using the elliptic integral model.
 if nargin < 4
     %L = 58.5e-3/2;
     %R = 68.2e-3/2;

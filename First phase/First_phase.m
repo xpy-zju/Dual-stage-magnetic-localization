@@ -50,20 +50,7 @@ for i = 1:5
         r(i,j) = norm(big_mag_loc(i,:)' - us0(:,j));
     end
 end
-%% plot
-figure 
-j = 1;
-     set(gca,'FontName','Arial','FontSize',18)
-     set(gca,'linewidth',1);
-     set(gcf,'unit','centimeters','position',[10 0 20 20]); % 主视图
-     grid on
-     axis equal
-     xlim([-300,100])
-    ylim([-330,300])
-    zlim([500,850])
-    view(-40,40)
-    xlabel('{\it x} (mm)');ylabel('{\it y} (mm)');zlabel('{\it z} (mm)');
-    % print(gcf,'-dpng','-r600',['.\gif\sensor_init\sensor_00.png']);
+
 %% plot
 figure 
 j = 1;

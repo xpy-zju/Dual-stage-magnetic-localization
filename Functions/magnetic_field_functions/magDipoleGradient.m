@@ -1,4 +1,5 @@
 function G = magDipoleGradient(r,m)
+% magnetic gradient tensor of dipole model.
 mu0 = 4*pi*1e-7;
 x = r(1);
 y = r(2);

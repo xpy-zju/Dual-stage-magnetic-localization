@@ -1,6 +1,6 @@
 function B = magField(r,M,R,L)
-%MAGFIELD 计算圆柱形磁铁外部任意点的磁场强度，椭圆积分模型
-%   r为磁场坐标系下中心点到目标位置的矢量
+% Calculates the magnetic field strength at an point outside a cylindrical magnet using the elliptic integral model.
+% r is the vector from the magnet's center to the target position in the magnet's coordinate frame.
 
 % if nargin < 4
 %     L = 62.4/2;

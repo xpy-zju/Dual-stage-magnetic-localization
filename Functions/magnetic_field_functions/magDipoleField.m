@@ -1,6 +1,6 @@
 function B = magDipoleField(r,m)
-%MAGFIELD 计算圆柱形磁铁外部任意点的磁场强度，磁偶极子模型
-%   r为磁场坐标系下中心点到目标位置的矢量
+% Calculates the magnetic field at an arbitrary point outside a cylindrical magnet using the magnetic dipole model.
+% r is the vector from the magnetss center to the target position in the magnet's coordinate frame.
 x = r(1);
 y = r(2);
 z = r(3);

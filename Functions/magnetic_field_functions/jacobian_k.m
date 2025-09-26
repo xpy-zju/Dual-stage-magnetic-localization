@@ -1,5 +1,5 @@
 function output = jacobian_k(usi,uMi,thetasi,thetaMi,sz)
-%Jk,已弃用
+%Jk, Deprecated
 Rso = expm(-skew(thetasi));
 RoM = expm(skew(thetaMi));
 RMo = RoM';

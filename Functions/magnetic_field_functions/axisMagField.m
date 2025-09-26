@@ -1,5 +1,5 @@
 function B = axisMagField(l,dl,L,R,M)
-%此函数用于计算轴线上的理论磁场强度，用于标定大磁铁参数
+%This function calculates the theoretical magnetic field strength along the axis
 if nargin<5
     M = 9.366138787219805e+8;
 end

@@ -13,7 +13,7 @@ function [ um_esti, thetam_esti] = solver_for_step2_fminunc(m0, um0, thetam0, Bs
 end
 
 function [Loss_step2,g] = calculate_loss(u_theta_of_small_mag, Bs_cal_minus_BM, m0, us, thetas, thetam0, ids)
-    Bs_hat = reshape(Bs_cal_minus_BM, [], 1); %实际的传感器测到的值
+    Bs_hat = reshape(Bs_cal_minus_BM, [], 1); %measurement
     Bs_minus_Bs_hat = zeros([3*length(ids),1]); % 3n*1
     %m0 = u_theta_of_small_mag(6);
     m0 = m0{1};

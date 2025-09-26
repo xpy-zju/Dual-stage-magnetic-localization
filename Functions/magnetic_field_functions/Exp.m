@@ -1,4 +1,4 @@
 function output = Exp(theta)
-%李代数转旋转矩阵
+%Convert a Lie algebra element to a rotation matrix.
 output = expm(skew(theta));
 end

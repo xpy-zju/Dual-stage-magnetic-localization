@@ -1,5 +1,6 @@
 function B = B_z(rho,z,M,R,L)
-%用于计算Bz，椭圆积分形式，需要安装elfun18支持包
+% calculate Bz in the form of elliptic integrals
+% requires the elfun18 package to be installed.
 if nargin < 5
     L =  62.4/2;
     R = 68/2;

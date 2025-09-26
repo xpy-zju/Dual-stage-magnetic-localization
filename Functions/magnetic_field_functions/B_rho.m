@@ -1,5 +1,6 @@
 function B = B_rho(rho,z,M,R,L)
-%用于计算Brho，椭圆积分形式，需要安装elfun18支持包
+% calculate Brho in the form of elliptic integrals
+% requires the elfun18 package to be installed.
 % L is 1/2 height of the cylinder
 % R is the radius of the cylinder
 

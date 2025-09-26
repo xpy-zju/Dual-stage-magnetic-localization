@@ -1,42 +1,41 @@
 function [m_esti, um_esti, thetam_esti] = solver_for_step2(m0, um0, thetam0, Bs_cal_minus_BM, us, thetas,ids)
-%% 参数说明
 
-% um0, thetam0 初值 3*1
-% Bs_cal_minus_BM 3*n的矩阵【存疑，为什么不直接3*n，我先按照3*n写了】，表示除去大磁铁影响的，完全由小磁铁造成的传感器读数
-% us 1*9 cell，每个cell 3*1的向量
-% thetas同上
-% Jacobian_2 的输出 3n*7的矩阵，n为传感器数量
+% um0, thetam0 initial value 3*1
+% Bs_cal_minus_BM 3*n
+% us 1*9 cell，
+% thetas
+% Jacobian_2 3n*7
 
-%% L-M优化过程
-% 初始条件
-threshold = 1e-3; %B的单位是 uT？
+%% L-M
+% initialize
+threshold = 1e-3; 
 Sensor_for_optim = ids;
 m_esti = m0;
 um_esti = um0;
 thetam_esti = thetam0;
-Bs_hat = reshape(Bs_cal_minus_BM, [], 1); %实际的传感器测到的值
+Bs_hat = reshape(Bs_cal_minus_BM, [], 1); % measurement
 max_iteration = 100000;
 tau = 100;
 step_now = 0;
-% 循环
+% loop
 tic
 while step_now<max_iteration
  
-% 1. 准备[Bs-Bs^]^t矩阵
+% 1. Prepare [Bs-Bs^]^t
     Bs_minus_Bs_hat = []; % 3n*1
     for id = Sensor_for_optim
         r_m = Exp(-thetam_esti) * (us{id} - um_esti);
         B_dipole = Exp(-thetas{id}) * Exp(thetam_esti) * magDipoleField(r_m, m_esti);
         Bs_minus_Bs_hat = [Bs_minus_Bs_hat; B_dipole-Bs_hat(id*3-2:id*3)];
     end
-% 2. [Bs-Bs^]^t和Bs的雅可比相乘，得到关于Loss的最终jacobian
+% 2. Multiply [Bs-Bs^]^t by the Jacobian of Bs to obtain the final Jacobian of the loss function.
 jacobian_Bs = Jacobian_2(m_esti, um_esti, thetam_esti, us, thetas);
 row_slected = sort([Sensor_for_optim*3-2, Sensor_for_optim*3-1, Sensor_for_optim*3]);
 jacobian_Bs_selected = jacobian_Bs(row_slected, :); % 3n*7
 
 jacobian_L = Bs_minus_Bs_hat' * jacobian_Bs_selected;
 %J = test_jacobian(Sensor_for_optim, Bs_hat, us, thetas, thetam_esti, um_esti, m_esti);
-% 3. 执行LM优化
+% 3. LM optimization
 if step_now == 0
     A0 = jacobian_L' * jacobian_L;
     u0 = tau * max(diag(A0));
@@ -50,7 +49,7 @@ delta_x = -inv((A + u*eye(7))) * (jacobian_L' * calcu_f(Sensor_for_optim, Bs_hat
 delta_m = delta_x(1);
 delta_um = delta_x(2:4);
 delta_thetam = delta_x(5:7);
-    % 确定/讨论 信赖区域的范围
+    % Determine / discuss the range of the trust region.
     Loss_now = calcu_f(Sensor_for_optim, Bs_hat, us, thetas, thetam_esti, um_esti, m_esti);
     fprintf('Current Loss : %4.2f \n', Loss_now);
     m_esti_try = m_esti + delta_m;
@@ -76,7 +75,6 @@ delta_thetam = delta_x(5:7);
             u =0.25 * u;
         end
     else
-        %不更新变量
         u = 1.5 * u;
     end
 if u<threshold

@@ -80,10 +80,10 @@ for  i = 1:5
     % zlim([500,850])
     view(-40,40)
     xlabel('{\it x} (mm)');ylabel('{\it y} (mm)');zlabel('{\it z} (mm)');
-    % print(gcf,'-dpng','-r600',['.\gif\sensor_init\sensor_',int2str(i)','.png']);
+    % print(gcf,'-dpng','-r600',['First phase\sensor_init\sensor_',int2str(i)','.png']);
 end
 plot_sensor([us0(:,1:j);thetas0(:,1:j)],3,[0.5,0.5,0.5],[0.5,0.5,0.5],0.5);
-% print(gcf,'-dpng','-r600',['.\gif\sensor_init\sensor_6.png']);
+% print(gcf,'-dpng','-r600',['First phase\sensor_init\sensor_6.png']);
 
 %%
 figure
@@ -122,14 +122,14 @@ for j = 2:16
     xlabel('{\it x} (mm)');ylabel('{\it y} (mm)');zlabel('{\it z} (mm)');
      
     %
-    % print(gcf,'-dpng','-r600',['.\gif\sensor_init\sensor_',int2str(j+5),'.png']);
+    % print(gcf,'-dpng','-r600',['First phase\sensor_init\sensor_',int2str(j+5),'.png']);
     
 end
 %% 
 figure
 steps = 20;
 lim_max = [-27.2245  427.2311;-672.2265 -217.7709;422.7962  940.7190];
-lim_min = [69.2699  129.3606;-637.4079 -610.0668;736.9862  765.4704];
+lim_min = [75.2699  135.3606;-637.4079 -610.0668;736.9862  765.4704];
 limitit = (lim_min - lim_max)/(steps-1);
 sizeit = -2/steps;
 clf
@@ -151,26 +151,18 @@ for j = 1:steps
     zlim(limitit(3,:)*(j-1)  + lim_max(3,:))
     xlabel('{\it x} (mm)');ylabel('{\it y} (mm)');zlabel('{\it z} (mm)');
     
-    % print(gcf,'-dpng','-r600',['.\gif\sensor_lim\sensor_',int2str(j),'.png']);
+    print(gcf,'-dpng','-r600',['First phase\sensor_lim\sensor_',int2str(j),'.png']);
     
 end
 %%
 figure
-
-thetas00 = repmat(mean(thetas_est_,2),1,16);
-R = Exp(mean(thetas_est_,2));
-dp = [0;6;0];
-for i = 1:4
-    for j = 1:4
-        us00(:,i+j*4-4) = us_est_(:,1) + R*[-12*i+12;-6*j+6;0];
-    end
-end
+thetas00 = thetas_est_;
+us00 = us_est_;
 steps = 10;
 moveit = (us00 - us0)/steps;
 rotit = (thetas00-thetas0)/steps;
 us_new = us0;
 thetas_new = thetas0;
-
 
 for j = 1:steps+1
     clf
@@ -195,10 +187,11 @@ for j = 1:steps+1
     zlim(lim_min(3,:))
     view(-40,40)
     xlabel('{\it x} (mm)');ylabel('{\it y} (mm)');zlabel('{\it z} (mm)');
-    % print(gcf,'-dpng','-r600',['.\gif\sensor_move\sensor_',int2str(j),'.png']);
+    % print(gcf,'-dpng','-r600',['First phase\sensor_move\sensor_',int2str(j),'.png']);
 end
-plot_sensor_board(60,24, mean(us_new,2),mean(thetas_new,2),[165,214,167]/255,[0.3,0.3,0.3],0.5)
-% print(gcf,'-dpng','-r600',['.\gif\sensor_move\sensor_',int2str(j+1),'.png']);
+
+plot_sensor_board(60,30, mean(us00,2),mean(thetas00,2),[165,214,167]/255,[0.3,0.3,0.3],0.5)
+% print(gcf,'-dpng','-r600',['First phase\sensor_move\sensor_',int2str(j+1),'.png']);
     
 
 function plot_sensor_board(width,height,us,thetas,facecolor,edgecolor,alpha)
